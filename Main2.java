@@ -39,14 +39,11 @@ public class Main2 {
             System.out.println("Enter payment method (credit/debit):");
             String choice = scanner.nextLine().toLowerCase();
 
-            PaymentMethod paymentMethod;
-            if (choice.equals("debit")) {
-            paymentMethod = new DebitCardPayment();
-            } else {
-            paymentMethod = new CreditCardPayment();
-            }
-            
-            PaymentProcessor paymentProcessor = new PaymentProcessor(paymentMethod);
+            PaymentProcessor paymentProcessor = new PaymentProcessor(
+                choice.equals("debit")
+                    ? new DebitCardPayment()
+                    : new CreditCardPayment()
+            );
             paymentProcessor.pay(23);
         } catch (Exception e) {
             System.out.println("Error occurred: " + e.getMessage());
